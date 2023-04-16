@@ -1,6 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
-require_once 'mobilePhone.php';
+require_once 'mobile_phone.php';
 require_once 'database.php';
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -26,10 +26,11 @@ if (isset($_POST['phone_id'])) {
         $price = $_POST['price'];
         $availability = ($_POST['availability'] == 'true');
 
-        $phone->setBrand($brand);
-        $phone->setModel($model);
-        $phone->setPrice($price);
-        $phone->setAvailability($availability);
+        $phone
+            ->setBrand($brand)
+            ->setModel($model)
+            ->setPrice($price)
+            ->setAvailability($availability);
 
         $phone->edit($pdo);
 
