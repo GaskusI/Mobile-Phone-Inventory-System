@@ -3,10 +3,18 @@
 Technologies used:
 
   HTML: for creating the structure and content of the web pages
+  
   CSS: for styling the web pages
+  
   JavaScript: for adding interactivity to the web pages
+  
   PHP: for server-side scripting and interacting with databases
+  
   MySQL: for storing and retrieving data from a database
+  
+  
+  
+  
   
 Design choices:
 
