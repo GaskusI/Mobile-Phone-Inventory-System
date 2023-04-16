@@ -1,0 +1,32 @@
+{% include 'header.twig' %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form method="post" action="add_phone.php" style="width: 50%;">
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" class="form-control" id="brand" name="brand" required>
+            </div>
+
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" class="form-control" id="model" name="model" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" id="price" name="price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="availability">Availability:</label>
+                <select class="form-control" id="availability" name="availability" required>
+                    <option value="1">Available</option>
+                    <option value="0">Unavailable</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Phone</button>
+        </form>
+    </div>
+{% endblock %}
