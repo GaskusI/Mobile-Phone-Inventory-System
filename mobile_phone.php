@@ -1,4 +1,6 @@
 <?php
+
+require_once 'logging.php';
 class MobilePhone
 {
     private $id;
@@ -61,7 +63,7 @@ class MobilePhone
         return $this;
     }
 
-    public function setAvailability($price)
+    public function setAvailability($availability)
     {
         $this->availability = $availability;
         return $this;
@@ -70,14 +72,26 @@ class MobilePhone
     public function add($pdo)
     {
         $stmt = $pdo->prepare("INSERT INTO phones (brand, model, price, availability) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$this->brand, $this->model, $this->price, $this->availability]);
+        $stmt->execute([$this->brand,
+                $this->model,
+                $this->price,
+                $this->availability]);
+
         $this->id = $pdo->lastInsertId();
+        
+        logged_add($pdo, 'Added ' . $this->id . ' phone.');
     }
 
     public function edit($pdo)
     {
         $stmt = $pdo->prepare("UPDATE phones SET brand = ?, model = ?, price = ?, availability = ? WHERE id = ?");
-        $stmt->execute([$this->brand, $this->model, $this->price, $this->availability, $this->id]);
+        $stmt->execute([$this->brand, 
+                $this->model,
+                $this->price,
+                $this->availability, 
+                $this->id]);
+
+        logged_edit($pdo, 'Edited ' . $this->id . ' phone.');
     }
 
     public function delete($pdo)
@@ -85,7 +99,8 @@ class MobilePhone
         if ($this->id) {
             $stmt = $pdo->prepare("DELETE FROM phones WHERE id = ?");
             $stmt->execute([$this->id]);
-//            $this->id = null;
+
+            logged_delete($pdo, 'Deleted ' . $this->id . ' phone.');
         }
     }
 }

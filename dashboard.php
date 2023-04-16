@@ -17,5 +17,3 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $phones[] = $phone;
 }
 echo $twig->render('dashboard.twig', ['phones' => $phones]);
-
-?>

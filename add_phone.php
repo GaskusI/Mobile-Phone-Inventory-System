@@ -3,6 +3,7 @@ require_once 'vendor/autoload.php';
 require_once 'mobile_phone.php';
 require_once 'database.php';
 require_once 'session_check.php';
+require_once 'logging.php';
 
 session_check();
 
@@ -24,7 +25,6 @@ $phone = new MobilePhone([
 ]);
 
 $phone->add($pdo);
-
 header('Location: dashboard.php');
 
 exit;
