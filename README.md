@@ -23,6 +23,16 @@ Design choices:
   
   Log in functionality was made (in my opinion) in a good way but not having Users class really messed the whole system up.
   
-  Most of the time was wasted trying to pass object to add/edit forms while being serialized.
-  
   At the moment security is below average.
+
+
+
+
+
+Stuff that made me run out of time:
+
+I should really learn to read what is said in the document.
+
+definitely should learn more about php.
+
+Most of the time was wasted trying to pass object to add/edit forms while being serialized.
