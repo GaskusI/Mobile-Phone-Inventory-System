@@ -2,6 +2,9 @@
 require_once 'vendor/autoload.php';
 require_once 'mobile_phone.php';
 require_once 'database.php';
+require_once 'session_check.php';
+
+session_check();
 
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
@@ -34,7 +37,7 @@ if (isset($_POST['phone_id'])) {
 
         $phone->edit($pdo);
 
-        header("Location: index.php");
+        header('Location: dashboard.php');
         exit;
     }
 } else {

@@ -1,0 +1,55 @@
+{% include 'header.twig' %}
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand mr-auto" href="">
+        Hello, admin!
+    </a>
+    <button class="btn btn-outline-light my-2 my-sm-0" type="submit" onclick="window.location.href='logout.php'">Logout</button>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Availability</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for phone in phones %}
+                    <tr>
+                        <td>{{ phone.getBrand() }}</td>
+                        <td>{{ phone.getModel() }}</td>
+                        <td>{{ phone.getPrice() }}</td>
+                        <td>{{ phone.getAvailability() ? 'Available' : 'Unavailable' }}</td>
+                        <td>
+                            <form method="post" action="edit_phone.php">
+                                <input type="hidden" name="phone_id" value="{{ phone.getId() }}">
+                                <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" action="delete_phone.php" onsubmit="return confirm('Are you sure you want to delete this phone?')">
+                                <input type="hidden" name="phone_id" value="{{ phone.getId() }}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <a href="add_phone.php"><button class="btn btn-success">Add Phone</button></a>
+            </div>
+        </div>
+    </div>
+</div>
