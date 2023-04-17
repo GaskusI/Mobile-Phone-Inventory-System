@@ -6,7 +6,8 @@ require_once 'session_check.php';
 
 session_check();
 
-if (isset($_POST['phone_id'])) {
+if (isset($_POST['phone_id'])) 
+{
     $phone_id = $_POST['phone_id'];
     $phone = new MobilePhone(['id' => $phone_id]);
     $phone->delete($pdo);

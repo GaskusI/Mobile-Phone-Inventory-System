@@ -69,7 +69,7 @@ class MobilePhone
         return $this;
     }
 
-    public function add($pdo)
+    public function add(PDO $pdo)
     {
         $stmt = $pdo->prepare("INSERT INTO phones (brand, model, price, availability) VALUES (?, ?, ?, ?)");
         $stmt->execute([$this->brand,
@@ -79,10 +79,10 @@ class MobilePhone
 
         $this->id = $pdo->lastInsertId();
         
-        logged_add($pdo, 'Added ' . $this->id . ' phone.');
+        log_action($pdo ,'Added ' . $this->id . ' phone.');
     }
 
-    public function edit($pdo)
+    public function edit(PDO $pdo)
     {
         $stmt = $pdo->prepare("UPDATE phones SET brand = ?, model = ?, price = ?, availability = ? WHERE id = ?");
         $stmt->execute([$this->brand, 
@@ -91,16 +91,16 @@ class MobilePhone
                 $this->availability, 
                 $this->id]);
 
-        logged_edit($pdo, 'Edited ' . $this->id . ' phone.');
+        log_action($pdo, 'Edited ' . $this->id . ' phone.');
     }
 
-    public function delete($pdo)
+    public function delete(PDO $pdo)
     {
         if ($this->id) {
             $stmt = $pdo->prepare("DELETE FROM phones WHERE id = ?");
             $stmt->execute([$this->id]);
 
-            logged_delete($pdo, 'Deleted ' . $this->id . ' phone.');
+            log_action($pdo, 'Deleted ' . $this->id . ' phone.');
         }
     }
 }

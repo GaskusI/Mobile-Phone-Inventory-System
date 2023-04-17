@@ -12,7 +12,8 @@ $stmt->execute();
 
 $phones = [];
 
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) 
+{
     $phone = new MobilePhone($row);
     $phones[] = $phone;
 }

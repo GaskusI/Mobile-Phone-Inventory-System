@@ -9,8 +9,9 @@ $twig = new \Twig\Environment($loader);
 session_check();
 
 $stmt = $pdo->query('SELECT * FROM logs');
-if (!$stmt) {
-die('Error: ' . $pdo->errorInfo()[2]);
+if (!$stmt) 
+{
+    die('Error: ' . $pdo->errorInfo()[2]);
 }
 
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);

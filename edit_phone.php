@@ -9,7 +9,8 @@ session_check();
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 
-if (isset($_POST['phone_id'])) {
+if (isset($_POST['phone_id'])) 
+{
     $phone_id = $_POST['phone_id'];
 
     $stmt = $pdo->prepare("SELECT * FROM phones WHERE id = ?");
@@ -23,7 +24,8 @@ if (isset($_POST['phone_id'])) {
         exit;
     }
 
-    if (isset($_POST['brand']) && isset($_POST['model']) && isset($_POST['price']) && isset($_POST['availability'])) {
+    if (isset($_POST['brand']) && isset($_POST['model']) && isset($_POST['price']) && isset($_POST['availability']))
+    {
         $brand = $_POST['brand'];
         $model = $_POST['model'];
         $price = $_POST['price'];

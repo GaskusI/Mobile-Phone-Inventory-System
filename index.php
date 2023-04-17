@@ -10,7 +10,8 @@ session_start();
 //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 //echo $hashedPassword;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -20,21 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
-            if($_SESSION != NULL) {
-                $stmt = $pdo->prepare('INSERT INTO logs (user_id, event) VALUES (:user_id, :event)');
-                $stmt->execute([
-                    'user_id' => $_SESSION['user_id'],
-                    'event' => "Logged in.",
-                ]);
-            }
+        log_session($pdo, $_SESSION['user_id'], "Logged in.");
         header('Location: dashboard.php');
         exit;
     } else {
-        $error = 'Invalid username or password';
+        $error = 'Invalid username or password'; //twig padaryt kad errora ismestu, nes dabar sita eilute is dalies nieko nepadaro
     }
 }
 
-// Render the login form with an error message (if any)
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 echo $twig->render('index.twig', ['error' => $error ?? null]);
