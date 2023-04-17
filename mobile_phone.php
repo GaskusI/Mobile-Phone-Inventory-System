@@ -1,6 +1,7 @@
 <?php
 
 require_once 'logging.php';
+require_once 'database.php';
 class MobilePhone
 {
     private $id;
@@ -71,11 +72,12 @@ class MobilePhone
 
     public function add(PDO $pdo)
     {
-        $stmt = $pdo->prepare("INSERT INTO phones (brand, model, price, availability) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$this->brand,
-                $this->model,
-                $this->price,
-                $this->availability]);
+        $stmt = prepareStatement($pdo, "INSERT INTO phones (brand, model, price, availability) VALUES (?, ?, ?, ?)", [
+            $this->brand,
+            $this->model,
+            $this->price,
+            $this->availability
+        ]);
 
         $this->id = $pdo->lastInsertId();
         
@@ -84,19 +86,22 @@ class MobilePhone
 
     public function edit(PDO $pdo)
     {
-        $stmt = $pdo->prepare("UPDATE phones SET brand = ?, model = ?, price = ?, availability = ? WHERE id = ?");
-        $stmt->execute([$this->brand, 
-                $this->model,
-                $this->price,
-                $this->availability, 
-                $this->id]);
+        $stmt = prepareStatement($pdo, "UPDATE phones SET brand = ?, model = ?, price = ?, availability = ? WHERE id = ?", [
+            $this->brand,
+            $this->model,
+            $this->price,
+            $this->availability,
+            $this->id
+        ]);
 
         log_action($pdo, 'Edited ' . $this->id . ' phone.');
     }
 
     public function delete(PDO $pdo)
     {
-        if ($this->id) {
+        if ($this->id)
+        {
+            $stmt = prepareStatement($pdo, "DELETE FROM phones WHERE id = ?", [$this->id]);
             $stmt = $pdo->prepare("DELETE FROM phones WHERE id = ?");
             $stmt->execute([$this->id]);
 

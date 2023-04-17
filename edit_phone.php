@@ -13,8 +13,7 @@ if (isset($_POST['phone_id']))
 {
     $phone_id = $_POST['phone_id'];
 
-    $stmt = $pdo->prepare("SELECT * FROM phones WHERE id = ?");
-    $stmt->execute([$phone_id]);
+    $stmt = prepareStatement($pdo, "SELECT * FROM phones WHERE id = ?", [$phone_id]);
 
     if ($stmt->rowCount() > 0) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
