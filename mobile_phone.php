@@ -102,8 +102,6 @@ class MobilePhone
         if ($this->id)
         {
             $stmt = prepareStatement($pdo, "DELETE FROM phones WHERE id = ?", [$this->id]);
-            $stmt = $pdo->prepare("DELETE FROM phones WHERE id = ?");
-            $stmt->execute([$this->id]);
 
             log_action($pdo, 'Deleted ' . $this->id . ' phone.');
         }

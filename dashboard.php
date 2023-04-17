@@ -7,8 +7,9 @@ require_once 'session_check.php';
 $loader = new \Twig\Loader\FilesystemLoader('templates');
 $twig = new \Twig\Environment($loader);
 
-$stmt = $pdo->prepare("SELECT * FROM phones");
-$stmt->execute();
+$stmt = prepareStatement($pdo, "SELECT * FROM phones");
+//$stmt = $pdo->prepare("SELECT * FROM phones");
+//$stmt->execute();
 
 $phones = [];
 
